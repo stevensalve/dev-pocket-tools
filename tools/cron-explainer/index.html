@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Cron Explainer - what does this schedule do? (offline)</title>
+    <meta
+      name="description"
+      content="Explain a cron expression in plain English, catch common mistakes and list the next run times in IST and UTC. Runs in your browser; nothing is uploaded."
+    />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <main class="container wide">
+      <header class="site">
+        <div>
+          <h1>Cron Explainer</h1>
+          <p>Paste a cron expression and see what it means and when it will next run.</p>
+        </div>
+        <span class="badge">Works offline - nothing leaves this device</span>
+      </header>
+
+      <section class="card" aria-labelledby="h-a">
+        <h2 id="h-a">1. The expression</h2>
+        <label for="expr">Five fields: minute hour day-of-month month day-of-week (or @daily, @hourly...)</label>
+        <input type="text" id="expr" spellcheck="false" autocomplete="off" value="*/15 9-17 * * 1-5" />
+        <div class="grid">
+          <div>
+            <label for="preset">Common schedules</label
+            ><select id="preset"></select>
+          </div>
+          <div>
+            <label for="tz">The schedule runs in</label
+            ><select id="tz"></select>
+          </div>
+          <div><label for="count">How many runs to list</label><input type="number" id="count" min="1" max="50" value="10" /></div>
+        </div>
+        <p class="status" id="status" role="status"></p>
+        <p><strong id="plain"></strong></p>
+        <ul class="tips" id="warn"></ul>
+        <table class="hint" id="fields" aria-label="Fields"></table>
+      </section>
+
+      <section class="card" aria-labelledby="h-n">
+        <h2 id="h-n">2. Next runs</h2>
+        <div class="table-wrap"><table id="t-next"></table></div>
+        <p class="hint">
+          Times are wall-clock times in the chosen fixed offset. Daylight-saving changes are not applied: if your server follows daylight
+          saving, runs shift by an hour in those weeks. Standard cron has no seconds field and no L, W or # (those are Quartz).
+        </p>
+        <div class="row">
+          <button id="copy" type="button">Copy expression</button><button id="copy-text" type="button">Copy explanation</button>
+        </div>
+        <p class="status" id="out-status" role="status"></p>
+      </section>
+
+      <footer class="site"><a href="../../index.html">All tools</a> - MIT licensed</footer>
+    </main>
+    <script src="js/common.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Log Analyser - find what went wrong in a log (offline)</title>
+    <meta
+      name="description"
+      content="Paste or drop a log file: see error counts, the busiest minutes, repeated problems grouped together, and filter or export the lines. Runs in your browser; nothing is uploaded."
+    />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <main class="container wide">
+      <header class="site">
+        <div>
+          <h1>Log Analyser</h1>
+          <p>Paste a log and see what happened: errors, spikes and repeated problems. Logs never leave this tab.</p>
+        </div>
+        <span class="badge">Works offline - nothing leaves this device</span>
+      </header>
+
+      <section class="card" aria-labelledby="h-in">
+        <h2 id="h-in">1. Paste or drop a log</h2>
+        <label class="dropzone" id="drop">Drop a log file here (up to 20 MB), or click to choose<input type="file" id="file" /></label>
+        <label for="text">Or paste log lines</label>
+        <textarea class="code" id="text" rows="8" spellcheck="false"></textarea>
+        <div class="row">
+          <button class="primary" id="go" type="button">Analyse</button><button id="sample" type="button">Try a sample</button>
+        </div>
+        <p class="status" id="status" role="status"></p>
+        <p class="hint">
+          Reads JSON lines, logfmt, nginx/Apache access logs and lines like "2026-10-23 09:01:40 ERROR message". Lines that do not start a
+          new entry (stack traces) are kept with the entry above.
+        </p>
+      </section>
+
+      <section class="card" id="sum" hidden aria-labelledby="h-sum">
+        <h2 id="h-sum">2. Summary</h2>
+        <div class="stats" id="stats"></div>
+        <h3>Entries per <span id="unit">minute</span></h3>
+        <div class="table-wrap"><table id="t-time"></table></div>
+        <h3>Top problems (warnings and errors, grouped)</h3>
+        <div class="table-wrap"><table id="t-prob"></table></div>
+        <div id="acc" hidden>
+          <h3>Web requests</h3>
+          <div class="table-wrap"><table id="t-acc"></table></div>
+        </div>
+        <div class="row"><button id="copy" type="button">Copy summary</button></div>
+      </section>
+
+      <section class="card" id="flt" hidden aria-labelledby="h-f">
+        <h2 id="h-f">3. Filter the lines</h2>
+        <div class="row" id="lv"></div>
+        <label for="q">Search</label>
+        <input type="text" class="code" id="q" spellcheck="false" autocomplete="off" />
+        <label class="inline"><input type="checkbox" id="rx" /> Treat as regular expression</label>
+        <p class="status" id="fstatus" role="status"></p>
+        <pre class="code" id="lines"></pre>
+        <div class="row"><button id="csv" type="button">Download CSV of matches</button></div>
+      </section>
+
+      <footer class="site"><a href="../../index.html">All tools</a> - MIT licensed</footer>
+    </main>
+    <script src="js/common.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Semver &amp; Changelog Helper - versions, ranges and release notes (offline)</title>
+    <meta
+      name="description"
+      content="Compare and bump semantic versions, test version ranges like ^1.2.3, and turn conventional commit lines into release notes with a suggested next version. Runs in your browser."
+    />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <main class="container wide">
+      <header class="site">
+        <div>
+          <h1>Semver &amp; Changelog Helper</h1>
+          <p>Work out the next version, check a range, and draft release notes from commit messages.</p>
+        </div>
+        <span class="badge">Works offline - nothing leaves this device</span>
+      </header>
+
+      <section class="card" aria-labelledby="h-b">
+        <h2 id="h-b">1. Bump a version</h2>
+        <div class="grid">
+          <div>
+            <label for="cur">Current version</label
+            ><input type="text" class="code" id="cur" value="1.4.2" spellcheck="false" autocomplete="off" />
+          </div>
+          <div>
+            <label for="pre">Pre-release label</label
+            ><input type="text" class="code" id="pre" value="rc" spellcheck="false" autocomplete="off" />
+          </div>
+        </div>
+        <p class="status" id="bstatus" role="status"></p>
+        <div class="table-wrap"><table id="t-bump"></table></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-r">
+        <h2 id="h-r">2. Check a range</h2>
+        <label for="range">Range (npm style: ^1.2.3, ~1.2, &gt;=2 &lt;3, 1.x, 1.2.3 - 2.0.0, a || b)</label>
+        <input type="text" class="code" id="range" value="^1.2.0" spellcheck="false" autocomplete="off" />
+        <label for="vers">Versions to test, one per line (also used for sorting)</label>
+        <textarea class="code" id="vers" rows="6" spellcheck="false">
+1.1.9
+1.2.0
+1.9.3
+2.0.0
+2.1.0-beta.1
+1.10.0</textarea>
+        <p class="status" id="rstatus" role="status"></p>
+        <div class="table-wrap"><table id="t-range"></table></div>
+        <div class="row"><button id="sort" type="button">Sort the list (newest first)</button></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-c">
+        <h2 id="h-c">3. Release notes from commits</h2>
+        <label for="log">Commit messages, one per line (for example the output of <code>git log --oneline</code>)</label>
+        <textarea class="code" id="log" rows="9" spellcheck="false"></textarea>
+        <div class="grid">
+          <div>
+            <label for="rdate">Release date (optional)</label
+            ><input type="text" class="code" id="rdate" placeholder="2026-10-23" spellcheck="false" autocomplete="off" />
+          </div>
+          <div>
+            <label class="inline"><input type="checkbox" id="rall" /> Include docs, chores, CI and tests</label>
+          </div>
+        </div>
+        <div class="row">
+          <button class="primary" id="mk" type="button">Draft release notes</button><button id="sample" type="button">Try a sample</button>
+        </div>
+        <p class="status" id="cstatus" role="status"></p>
+        <div class="stats" id="cstats"></div>
+        <pre class="code" id="md"></pre>
+        <div class="row"><button id="cmd" type="button">Copy Markdown</button><button id="dl" type="button">Download .md</button></div>
+        <p class="hint">
+          Uses the current version from step 1. Before 1.0.0 a breaking change moves the minor number, as most projects do. Commits that are
+          not in the "type(scope): subject" form are listed as skipped.
+        </p>
+      </section>
+
+      <footer class="site"><a href="../../index.html">All tools</a> - MIT licensed</footer>
+    </main>
+    <script src="js/common.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

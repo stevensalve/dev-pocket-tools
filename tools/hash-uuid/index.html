@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Hash &amp; UUID Generator - checksums and identifiers (offline)</title>
+    <meta
+      name="description"
+      content="Hash text or files (MD5, SHA-1, SHA-256, SHA-384, SHA-512), compute HMACs, verify a checksum and generate UUIDs. Runs in your browser; nothing is uploaded."
+    />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <main class="container wide">
+      <header class="site">
+        <div>
+          <h1>Hash &amp; UUID Generator</h1>
+          <p>Checksums for text and files, HMACs and UUIDs. Files are hashed here and never uploaded.</p>
+        </div>
+        <span class="badge">Works offline - nothing leaves this device</span>
+      </header>
+
+      <section class="card" aria-labelledby="h-h">
+        <h2 id="h-h">1. Hash text or a file</h2>
+        <label class="dropzone" id="drop">Drop a file here (up to 200 MB), or click to choose<input type="file" id="file" /></label>
+        <label for="text">Or type text</label>
+        <textarea class="code" id="text" rows="4" spellcheck="false"></textarea>
+        <p class="status" id="status" role="status"></p>
+        <div class="table-wrap"><table id="t-hash"></table></div>
+        <p class="hint">MD5 and SHA-1 can be forged and must not be used for security. They are here to check old checksums.</p>
+      </section>
+
+      <section class="card" aria-labelledby="h-v">
+        <h2 id="h-v">2. Check a checksum</h2>
+        <label for="expected">Paste the checksum you were given (any common format)</label>
+        <input type="text" class="code" id="expected" spellcheck="false" autocomplete="off" />
+        <p id="verdict"></p>
+      </section>
+
+      <section class="card" aria-labelledby="h-m">
+        <h2 id="h-m">3. HMAC</h2>
+        <div class="grid">
+          <div><label for="hkey">Secret key</label><input type="text" class="code" id="hkey" spellcheck="false" autocomplete="off" /></div>
+          <div>
+            <label for="halgo">Algorithm</label>
+            <select id="halgo">
+              <option>SHA-256</option>
+              <option>SHA-512</option>
+              <option>SHA-384</option>
+              <option>SHA-1</option>
+            </select>
+          </div>
+        </div>
+        <p class="hint">The message is the text in step 1.</p>
+        <pre class="code" id="hmac"></pre>
+      </section>
+
+      <section class="card" aria-labelledby="h-u">
+        <h2 id="h-u">4. UUIDs</h2>
+        <div class="grid">
+          <div>
+            <label for="uver">Version</label>
+            <select id="uver">
+              <option value="4">4 (random)</option>
+              <option value="7">7 (random, sorts by time)</option>
+            </select>
+          </div>
+          <div><label for="ucount">How many</label><input type="number" id="ucount" min="1" max="1000" value="5" /></div>
+        </div>
+        <div class="row">
+          <label class="inline"><input type="checkbox" id="uupper" /> Upper case</label>
+          <label class="inline"><input type="checkbox" id="unodash" /> No dashes</label>
+          <label class="inline"><input type="checkbox" id="ubrace" /> Braces</label>
+          <button class="primary" id="ugen" type="button">Generate</button>
+          <button id="ucopy" type="button">Copy all</button>
+        </div>
+        <pre class="code" id="uout"></pre>
+        <label for="uin">Inspect a UUID</label>
+        <input type="text" class="code" id="uin" spellcheck="false" autocomplete="off" />
+        <p id="uinfo"></p>
+        <p class="status" id="out-status" role="status"></p>
+      </section>
+
+      <footer class="site"><a href="../../index.html">All tools</a> - MIT licensed</footer>
+    </main>
+    <script src="js/common.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

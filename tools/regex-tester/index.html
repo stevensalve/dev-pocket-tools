@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Regex Tester - live matches, groups and plain-English explanation (offline)</title>
+    <meta
+      name="description"
+      content="Test a JavaScript regular expression against text with live highlights, capture groups, replacement and a token-by-token explanation. Runs in your browser; nothing is uploaded."
+    />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <main class="container wide">
+      <header class="site">
+        <div>
+          <h1>Regex Tester</h1>
+          <p>Type a pattern and some text. See what matches, what each part means, and try a replacement.</p>
+        </div>
+        <span class="badge">Works offline - nothing leaves this device</span>
+      </header>
+
+      <section class="card" aria-labelledby="h-p">
+        <h2 id="h-p">1. Pattern</h2>
+        <label for="pattern">Pattern (without the slashes)</label>
+        <input type="text" class="code" id="pattern" spellcheck="false" autocomplete="off" />
+        <fieldset class="row" id="flags"><legend>Flags</legend></fieldset>
+        <p class="status" id="status" role="status"></p>
+        <ul class="tips" id="warn"></ul>
+        <label for="snippet">Or start from a common pattern</label>
+        <select id="snippet"></select>
+        <div class="row"><button id="demo" type="button">Load sample</button></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-t">
+        <h2 id="h-t">2. Text to test</h2>
+        <textarea class="code" id="text" rows="8" spellcheck="false"></textarea>
+        <h3>Matches</h3>
+        <pre class="code" id="hl"></pre>
+        <div class="stats" id="stats"></div>
+        <div class="table-wrap"><table id="t-matches"></table></div>
+        <p class="hint">
+          This tool uses your browser's JavaScript regex engine. A pattern with nested repeats can freeze the page on unlucky text, and a
+          running match cannot be stopped: reload if that happens.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="h-r">
+        <h2 id="h-r">3. Replace</h2>
+        <label for="repl">Replacement (use $1, $2, $&amp; or $&lt;name&gt;)</label>
+        <input type="text" class="code" id="repl" spellcheck="false" />
+        <pre class="code" id="replaced"></pre>
+        <div class="row">
+          <button id="copy-repl" type="button">Copy result</button><button id="copy-pat" type="button">Copy pattern as /…/flags</button>
+        </div>
+        <p class="status" id="out-status" role="status"></p>
+      </section>
+
+      <section class="card" aria-labelledby="h-e">
+        <h2 id="h-e">What the pattern means</h2>
+        <div class="table-wrap"><table id="t-explain"></table></div>
+      </section>
+
+      <footer class="site"><a href="../../index.html">All tools</a> - MIT licensed</footer>
+    </main>
+    <script src="js/common.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
