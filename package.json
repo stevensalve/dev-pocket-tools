@@ -1,0 +1,48 @@
+{
+  "name": "dev-pocket-tools",
+  "version": "1.0.0",
+  "description": "Ten small, privacy-friendly developer tools (JSON/YAML/XML converter, regex tester, cron explainer, JWT and Base64 decoder, diff, timestamps and more) that run offline in the browser",
+  "private": true,
+  "license": "MIT",
+  "type": "commonjs",
+  "scripts": {
+    "vendor": "node scripts/vendor.mjs",
+    "sync": "node scripts/sync-shared.mjs",
+    "check:sync": "node scripts/sync-shared.mjs --check",
+    "check:offline": "node scripts/check-offline.mjs",
+    "test": "node scripts/run-tests.mjs",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "serve": "node scripts/serve.mjs",
+    "verify": "npm run check:sync && npm run check:structure && npm run check:offline && npm run lint && npm run format:check && npm test",
+    "check:structure": "node scripts/check-structure.mjs",
+    "build": "node scripts/build-site.mjs",
+    "new-tool": "node scripts/new-tool.mjs",
+    "export-tool": "node scripts/export-tool.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "fast-xml-parser": "5.11.2",
+    "globals": "^15.0.0",
+    "js-yaml": "5.5.0",
+    "prettier": "^3.3.0"
+  },
+  "keywords": [
+    "offline",
+    "privacy",
+    "developer-tools",
+    "json",
+    "yaml",
+    "regex",
+    "cron",
+    "jwt",
+    "india",
+    "browser-tools",
+    "no-build"
+  ]
+}

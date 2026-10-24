@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>URL &amp; Query Parser - split, edit and clean URLs (offline)</title>
+    <meta
+      name="description"
+      content="Split a URL into parts, edit its query parameters, strip tracking codes and spot secrets in links. Runs in your browser; nothing is uploaded."
+    />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <main class="container wide">
+      <header class="site">
+        <div>
+          <h1>URL &amp; Query Parser</h1>
+          <p>Paste a URL to see its parts and edit the query parameters. Nothing is sent anywhere.</p>
+        </div>
+        <span class="badge">Works offline - nothing leaves this device</span>
+      </header>
+
+      <section class="card" aria-labelledby="h-in">
+        <h2 id="h-in">1. The URL</h2>
+        <label for="src">URL</label>
+        <input type="text" class="code" id="src" spellcheck="false" autocomplete="off" />
+        <div class="row"><button id="demo" type="button">Load sample</button><button id="clear" type="button">Clear</button></div>
+        <p class="status" id="status" role="status"></p>
+        <ul class="tips" id="warn"></ul>
+        <ul id="notes" class="hint"></ul>
+      </section>
+
+      <section class="card" aria-labelledby="h-parts">
+        <h2 id="h-parts">2. Parts</h2>
+        <div class="table-wrap"><table id="t-parts"></table></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-q">
+        <h2 id="h-q">3. Query parameters</h2>
+        <div class="table-wrap"><table id="t-params"></table></div>
+        <div class="row">
+          <button id="add" type="button">Add a parameter</button>
+          <button id="sort" type="button">Sort by name</button>
+          <button id="strip" type="button">Remove tracking codes (utm_*, fbclid, gclid...)</button>
+        </div>
+        <h3>New URL</h3>
+        <pre class="code" id="rebuilt"></pre>
+        <div class="row"><button class="primary" id="copy" type="button">Copy new URL</button></div>
+        <p class="status" id="out-status" role="status"></p>
+        <h3>As JSON</h3>
+        <pre class="code" id="json"></pre>
+        <label for="from-json">Or build a query string from JSON</label>
+        <textarea class="code" id="from-json" rows="3" spellcheck="false">{"q":"cafe","size":["9","10"]}</textarea>
+        <pre class="code" id="from-json-out"></pre>
+      </section>
+
+      <footer class="site"><a href="../../index.html">All tools</a> - MIT licensed</footer>
+    </main>
+    <script src="js/common.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
